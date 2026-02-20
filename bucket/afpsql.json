@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "description": "Persistent PostgreSQL client for AI agents — SQL-native JSONL in, JSONL out",
+  "homepage": "https://github.com/cmnspore/agent-first-psql",
+  "license": "MIT",
+  "url": "https://github.com/cmnspore/agent-first-psql/releases/download/v0.1.0/afpsql-v0.1.0-x86_64-pc-windows-msvc.zip",
+  "hash": "4ec1735e4c52cd061a30795e56a3a3fa73de04506f263f1a0adaeb9af0c154df",
+  "bin": "afpsql.exe"
+}
