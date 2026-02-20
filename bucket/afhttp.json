@@ -1,9 +1,9 @@
 {
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Persistent HTTP client for AI agents — one request, one JSON line",
   "homepage": "https://github.com/cmnspore/agent-first-http",
   "license": "MIT",
-  "url": "https://github.com/cmnspore/agent-first-http/releases/download/v0.1.1/afhttp-v0.1.1-x86_64-pc-windows-msvc.zip",
-  "hash": "bc6cae217e3428e5540566efc7baa4fcf62d0b813f3f560da2ce87413c71cd6a",
+  "url": "https://github.com/cmnspore/agent-first-http/releases/download/v0.2.0/afhttp-v0.2.0-x86_64-pc-windows-msvc.zip",
+  "hash": "a029cbd7a70a9070492ec67eaa090fb6e0242f009fbef0078a358cade200cff2",
   "bin": "afhttp.exe"
 }
