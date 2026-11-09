@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '43 6 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  static:
+    runs-on: windows-2025
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+      - shell: pwsh
+        run: ./scripts/test.ps1 Static
+
+  install:
+    runs-on: windows-2025
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        manifest: [hypha, synapse]
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+      - name: Install pinned Scoop
+        shell: pwsh
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          git clone --filter=blob:none https://github.com/ScoopInstaller/Install.git "$env:RUNNER_TEMP/scoop-install"
+          git -C "$env:RUNNER_TEMP/scoop-install" checkout 3bcaeb2ea53ad611fd8552eb9f735c5e2cd52f40
+          $PSNativeCommandUseErrorActionPreference = $false
+          & "$env:RUNNER_TEMP/scoop-install/install.ps1" -RunAsAdmin
+          "$env:USERPROFILE/scoop/shims" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      - shell: pwsh
+        run: ./scripts/test.ps1 All -Manifest "bucket/${{ matrix.manifest }}.json"
